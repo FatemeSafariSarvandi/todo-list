@@ -1,0 +1,18 @@
+.input-container{
+ display: flex;
+ justify-content: center;
+ margin-top: 50px;
+}
+.input-form input{
+    font-size: large;
+    padding: 10px;
+
+}
+.input-form button{
+    font-size: larger;
+    padding: 9px 10px 9px 10px;
+    margin: 2px;
+}
+.input-form button:hover{
+    background-color:  rgb(243, 87, 118);
+}
