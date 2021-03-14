@@ -8,13 +8,13 @@ body {
     background: linear-gradient(
       96deg,
       #d4d6d5 1%,
-      #136c96 40%,
-       #022130 80%
+      #136c96 30%,
+       #022130 100%
     );
 }
 #title{
     font-family: 'Akaya Telivigala', cursive;
-    color: rgb(243, 87, 118);
+    color: rgb(247, 123, 148);
     margin-top: 30px;
     font-size: 100px;
 }
