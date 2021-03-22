@@ -5,16 +5,24 @@ class InputPart extends Component{
 
     state = {inputTerm:''};
 
+    onfilterCahnge =(e)=>{
+        this.props.onFilterChange(e.target.value);
+    }
+    onInputChange = (e) =>{
+        this.setState({inputTerm : e.target.value});
+    }
     formsubmitHandler=(e)=>{
         e.preventDefault();
         if(this.state.inputTerm === ""){
             console.log("empty");
         }
-        this.props.onsubmit({
+        this.props.onsubmit([
+        ...this.props.todos,
+        {
             todotext : this.state.inputTerm ,
             check : false ,
             id: Math.random()*100,
-        });
+        }]);
         this.setState({inputTerm: ''}); 
     };
 
@@ -35,7 +43,10 @@ class InputPart extends Component{
                         placeholder="Enter a new task to do"
                     />
                     <button type='submit'><i className="fas fa-plus"></i></button>
-                    <select>
+                    <select
+                    value={this.props.selectedFilter}
+                        onChange={this.onfilterCahnge}
+                    >
                         <option>All</option>
                         <option>completed</option>
                         <option>Not completed</option>

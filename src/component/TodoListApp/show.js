@@ -3,14 +3,17 @@ import Showtodo from './showtodo';
 class Show extends Component{
 
     render(){
-        console.log(this.props.todo);
+        const{filteredTodos , setTodos , todos} = this.props;
         return(
             <div>
-                 {this.props.todo.map((i)=>{
+                 {filteredTodos.map((i)=>{
                     return( 
                         <Showtodo
-                            work ={i.todotext}
-                            check = {i.check}
+                            todos={todos}
+                            setTodos={setTodos}
+                            todo={i}
+                            // work ={i.todotext}
+                            // check = {i.check}
                             key={i.id}
                       />
               )

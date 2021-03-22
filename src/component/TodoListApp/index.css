@@ -30,13 +30,19 @@
     width: 28%;
     margin-top: 8px;
 }
+.todoBox button{
+    background-color: #475569;
+    border: none;
+    margin: 8px 5px 0px 5px;
+}
 .check{
     font-size: 40px;
     color: chartreuse;
-    margin: 8px 5px 0px 10px;
+   
 }
 .trash{
     font-size: 40px;
     color: red;
-    margin: 8px 5px 0px 5px;
+}.completed{
+    text-decoration: line-through;
 }
