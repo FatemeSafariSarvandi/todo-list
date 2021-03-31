@@ -1,50 +1,69 @@
-import React , {Component}from 'react';
+import axios from 'axios';
+import React, { Component } from 'react';
+import address from '../../address/address';
 import './index.css';
 
-class InputPart extends Component{
+class InputPart extends Component {
+    state = { inputTerm: '' };
 
-    state = {inputTerm:''};
-
-    onfilterCahnge =(e)=>{
+    onfilterCahnge = (e) => {
         this.props.onFilterChange(e.target.value);
-    }
-    onInputChange = (e) =>{
-        this.setState({inputTerm : e.target.value});
-    }
-    formsubmitHandler=(e)=>{
+    };
+    onInputChange = (e) => {
+        this.setState({ inputTerm: e.target.value });
+    };
+    formsubmitHandler = async (e) => {
         e.preventDefault();
-        if(this.state.inputTerm === ""){
-            console.log("empty");
+        if (this.state.inputTerm === '') {
+            console.log('empty');
         }
-        this.props.onsubmit([
-        ...this.props.todos,
-        {
-            todotext : this.state.inputTerm ,
-            check : false ,
-            id: Math.random()*100,
-        }]);
-        this.setState({inputTerm: ''}); 
+        try {
+            const addingTodoData = await axios.post(
+                address + '/todos',
+                {
+                    name: 'todo',
+                    description: this.state.inputTerm,
+                    isChecked: false,
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${this.props.token}`,
+                    },
+                }
+            );
+            this.props.onsubmit([
+                ...this.props.todos,
+                {
+                    description: this.state.inputTerm,
+                    isChecked: false,
+                    _id: addingTodoData.data.data._id,
+                },
+            ]);
+            this.setState({ inputTerm: '' });
+        } catch (err) {
+            console.log(err.response);
+        }
     };
 
-    render(){
-        return(
+    render() {
+        return (
             <div className="input-container">
-                <form 
-                    onSubmit={this.formsubmitHandler}
-                    className="input-form"
-                >
+                <form onSubmit={this.formsubmitHandler} className="input-form">
                     <label htmlFor="inpt"></label>
-                    <input type="text" 
+                    <input
+                        type="text"
                         name="inpt"
                         value={this.state.inputTerm}
-                        onChange={(e)=>
-                            this.setState({inputTerm:e.target.value})
+                        onChange={(e) =>
+                            this.setState({ inputTerm: e.target.value })
                         }
                         placeholder="Enter a new task to do"
                     />
-                    <button type='submit'><i className="fas fa-plus"></i></button>
+                    <button type="submit">
+                        <i className="fas fa-plus"></i>
+                    </button>
                     <select
-                    value={this.props.selectedFilter}
+                        value={this.props.selectedFilter}
                         onChange={this.onfilterCahnge}
                     >
                         <option>All</option>
@@ -53,7 +72,7 @@ class InputPart extends Component{
                     </select>
                 </form>
             </div>
-        )
+        );
     }
 }
 

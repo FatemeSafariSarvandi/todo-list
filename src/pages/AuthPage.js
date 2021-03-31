@@ -1,8 +1,8 @@
 import React from 'react';
-// import Auth from '../components/Auth';
+import Auth from '../component/Auth/auth';
 
-const AuthPage = ()=>{
-    return <div>Auth</div>
-}
+const AuthPage = ({ isAthenticated, authHandler }) => {
+    return <Auth isAthenticated={isAthenticated} authHandler={authHandler} />;
+};
 
 export default AuthPage;

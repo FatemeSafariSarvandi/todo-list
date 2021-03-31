@@ -1,0 +1,66 @@
+.frame {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+header {
+    margin: 30px 10px 10px 10px;
+    color: blanchedalmond;
+    font-size: larger;
+    font-weight: bolder;
+    width: 100%;
+}
+.box {
+    margin: 15px;
+    padding: 30px 10px 30px 10px;
+    text-align: center;
+    background-color: blanchedalmond;
+    border-radius: 15px;
+    width: 350px;
+}
+.LoginSignUp {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+.AuthForm {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.inputOfAuth {
+    text-align: center;
+    margin: 5px;
+    width: 160px;
+    padding: 5px;
+    border: 1px solid black;
+    border-radius: 15px;
+}
+.buttonOfAuth {
+    text-align: center;
+    margin: 5px;
+    width: 160px;
+    padding: 5px;
+    border: 1px solid black;
+    border-radius: 15px;
+    color: white;
+    background-color: #475569;
+}
+.buttonOfAuth:hover {
+    color: rgb(240, 172, 70);
+    border: 3px solid rgb(240, 172, 70);
+}
+.inputOfAuth:hover {
+    width: 200px;
+    border: 2px solid green;
+}
+h1:hover {
+    cursor: pointer;
+}
+.toggle {
+    color: #475569;
+}
+.activeLogin,
+.activeSignup {
+    color: rgb(7, 32, 102);
+}

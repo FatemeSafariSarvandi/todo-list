@@ -1,25 +1,25 @@
-import React , {Component}from 'react';
+import React, { Component } from 'react';
 import Showtodo from './showtodo';
-class Show extends Component{
-
-    render(){
-        const{filteredTodos , setTodos , todos} = this.props;
-        return(
+class Show extends Component {
+    render() {
+        const { filteredTodos, setTodos, todos } = this.props;
+        return (
             <div>
-                 {filteredTodos.map((i)=>{
-                    return( 
+                {filteredTodos.map((i) => {
+                    return (
                         <Showtodo
+                            token={this.props.token}
                             todos={todos}
                             setTodos={setTodos}
                             todo={i}
-                            // work ={i.todotext}
-                            // check = {i.check}
-                            key={i.id}
-                      />
-              )
-          })}
+                            // description ={i.description}
+                            // isChecked = {i.isChecked}
+                            key={i._id}
+                        />
+                    );
+                })}
             </div>
-        )
+        );
     }
 }
 

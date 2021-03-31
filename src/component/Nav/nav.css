@@ -1,17 +1,26 @@
-.menu{
+.menu {
     display: flex;
     list-style: none;
     background-color: blanchedalmond;
     padding: 10px;
 }
-.item{
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+.item {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS',
+        sans-serif;
     color: rgb(7, 32, 102);
     font-size: large;
     text-decoration: none;
     padding: 10px;
-} 
-.item:hover{
+}
+.item:hover {
     color: blanchedalmond;
     background-color: rgb(7, 32, 102);
+}
+.wellcome {
+    text-transform: capitalize;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS',
+        sans-serif;
+    color: rgb(7, 32, 102);
+    font-size: large;
+    margin-left: auto;
 }
