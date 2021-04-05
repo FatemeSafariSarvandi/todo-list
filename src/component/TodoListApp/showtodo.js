@@ -2,40 +2,38 @@ import axios from 'axios';
 import React, { Component } from 'react';
 import './index.css';
 import address from '../../address/address';
-class Showtodo extends Component {
-    //eventHandler
-    deleteHandeler = async () => {
+//  for rename    todoData:todo
+const Showtodo = ({ token, todos, setTodos, todo }) => {
+    const deleteHandeler = async () => {
         try {
             const deleteTodoData = await axios.delete(
-                address + `/todos/${this.props.todo._id}`,
+                `${address}/todos/${todo._id}`,
                 {
                     headers: {
-                        Authorization: `Bearer ${this.props.token}`,
+                        Authorization: `Bearer ${token}`,
                     },
                 }
             );
-            this.props.setTodos(
-                this.props.todos.filter((el) => el._id !== this.props.todo._id)
-            );
+            setTodos(todos.filter((el) => el._id !== todo._id));
         } catch (err) {
             return alert(err.response);
         }
     };
-    completeHandeler = async () => {
+    const completeHandeler = async () => {
         try {
             const checkItemData = await axios.patch(
-                address + `/todos/${this.props.todo._id}`,
-                { isChecked: !this.props.todo.isChecked },
+                `${address}/todos/${todo._id}`,
+                { isChecked: !todo.isChecked },
                 {
                     headers: {
-                        Authorization: `Bearer ${this.props.token}`,
+                        Authorization: `Bearer ${token}`,
                     },
                 }
             );
 
-            this.props.setTodos(
-                this.props.todos.map((item) => {
-                    if (item._id === this.props.todo._id) {
+            setTodos(
+                todos.map((item) => {
+                    if (item._id === todo._id) {
                         return {
                             ...item,
                             isChecked: !item.isChecked,
@@ -48,27 +46,19 @@ class Showtodo extends Component {
             return alert(err.response);
         }
     };
-
-    render() {
-        //console.log(this.props.todo);
-        return (
-            <div className="todoBox">
-                <span
-                    className={`todo ${
-                        this.props.todo.isChecked ? 'completed' : ''
-                    }`}
-                >
-                    {this.props.todo.description}
-                </span>
-                <button onClick={this.completeHandeler}>
-                    <i className="far fa-check-square check"></i>
-                </button>
-                <button onClick={this.deleteHandeler}>
-                    <i className="fas fa-trash-alt trash"></i>
-                </button>
-            </div>
-        );
-    }
-}
+    return (
+        <div className="todoBox">
+            <span className={`todo ${todo.isChecked ? 'completed' : ''}`}>
+                {todo.description}
+            </span>
+            <button onClick={completeHandeler}>
+                <i className="far fa-check-square check"></i>
+            </button>
+            <button onClick={deleteHandeler}>
+                <i className="fas fa-trash-alt trash"></i>
+            </button>
+        </div>
+    );
+};
 
 export default Showtodo;

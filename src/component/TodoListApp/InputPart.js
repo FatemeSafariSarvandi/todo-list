@@ -1,79 +1,79 @@
 import axios from 'axios';
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import address from '../../address/address';
 import './index.css';
 
-class InputPart extends Component {
-    state = { inputTerm: '' };
-
-    onfilterCahnge = (e) => {
-        this.props.onFilterChange(e.target.value);
+const InputPart = ({
+    token,
+    selectedFilter,
+    todos,
+    onFilterChange,
+    onsubmit,
+}) => {
+    const [inputTerm, setInputTerm] = useState('');
+    const onfilterCahngefunction = (e) => {
+        onFilterChange(e.target.value);
     };
-    onInputChange = (e) => {
-        this.setState({ inputTerm: e.target.value });
+    const onInputChange = (e) => {
+        setInputTerm(e.target.value);
     };
-    formsubmitHandler = async (e) => {
+    const formsubmitHandler = async (e) => {
         e.preventDefault();
-        if (this.state.inputTerm === '') {
+        if (inputTerm === '') {
             console.log('empty');
         }
         try {
             const addingTodoData = await axios.post(
-                address + '/todos',
+                `${address}/todos`,
                 {
                     name: 'todo',
-                    description: this.state.inputTerm,
+                    description: inputTerm,
                     isChecked: false,
                 },
                 {
                     headers: {
-                        Authorization: `Bearer ${this.props.token}`,
+                        Authorization: `Bearer ${token}`,
                     },
                 }
             );
-            this.props.onsubmit([
-                ...this.props.todos,
+            onsubmit([
+                ...todos,
                 {
-                    description: this.state.inputTerm,
+                    description: inputTerm,
                     isChecked: false,
                     _id: addingTodoData.data.data._id,
                 },
             ]);
-            this.setState({ inputTerm: '' });
+            setInputTerm('');
         } catch (err) {
             console.log(err.response);
         }
     };
-
-    render() {
-        return (
-            <div className="input-container">
-                <form onSubmit={this.formsubmitHandler} className="input-form">
-                    <label htmlFor="inpt"></label>
-                    <input
-                        type="text"
-                        name="inpt"
-                        value={this.state.inputTerm}
-                        onChange={(e) =>
-                            this.setState({ inputTerm: e.target.value })
-                        }
-                        placeholder="Enter a new task to do"
-                    />
-                    <button type="submit">
-                        <i className="fas fa-plus"></i>
-                    </button>
-                    <select
-                        value={this.props.selectedFilter}
-                        onChange={this.onfilterCahnge}
-                    >
-                        <option>All</option>
-                        <option>completed</option>
-                        <option>Not completed</option>
-                    </select>
-                </form>
-            </div>
-        );
-    }
-}
+    return (
+        <div className="input-container">
+            <form onSubmit={formsubmitHandler} className="input-form">
+                <label htmlFor="inpt"></label>
+                <input
+                    type="text"
+                    name="inpt"
+                    value={inputTerm}
+                    onChange={(e) => setInputTerm(e.target.value)}
+                    placeholder="Enter a new task to do"
+                />
+                <button type="submit">
+                    <i className="fas fa-plus"></i>
+                </button>
+                <select
+                    value={selectedFilter}
+                    onChange={onfilterCahngefunction}
+                >
+                    <option>All</option>
+                    <option>completed</option>
+                    <option>Not completed</option>
+                </select>
+            </form>
+        </div>
+    );
+};
 
 export default InputPart;
